@@ -3,7 +3,7 @@ node_modules/
 dist/
 npm-debug.log
 yarn-error.log
-data/*
+data/*.json
 
 
 # Editor directories and files
