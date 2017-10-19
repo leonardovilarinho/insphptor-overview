@@ -19,6 +19,9 @@ export default {
         current: 'Last generation',
         interval: 'Interval in chart',
         found: 'found',
+        commits: 'Commits',
+        inserts: 'Inserts',
+        deletions: 'Deletions'
     },
 
     more: {
@@ -27,6 +30,7 @@ export default {
         project: 'Project',
         comparation: 'Comparation',
         history: 'History',
+        git: 'Team'
     },
 
     chart: {
@@ -39,9 +43,10 @@ export default {
         complexity: 'Complexity Ciclomatic',
         efferent: 'Efferent Coupling',
         afferent: 'Afferent Coupling',
-        encapsulation: 'Encapsulation',
-        cohesion: 'Cohesion',
+        cohesion: 'Lack of cohesion',
         all: 'All metrics',
+        instability: 'Instability',
+        bug: 'Bugs',
     },
 
     box: {
@@ -76,6 +81,10 @@ export default {
         star: {
             title: 'How are we?',
             body: 'See how many stars your code currently has.'
+        },
+        select: {
+            title: 'How\'s your team?',
+            body: 'Select the generation to see the graph of your team.'
         }
     },
 
@@ -84,8 +93,9 @@ export default {
         complexity: 'Path deviation amount',
         efferent: 'Number of dependencies of class',
         afferent: 'Number of class dependents',
-        encapsulation: 'Relationship between size of public and private methods',
         cohesion: 'Number of parts in which the code can divide',
         all: 'Sum of all metrics',
+        instability: 'Number of times the class has changed',
+        bug: 'Number of bugs in the class identified by the commit',
     },
 }

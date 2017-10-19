@@ -6,8 +6,8 @@
             <p class="control has-icons-left" v-tooltip="tooltip('metric', metricLabel)">
                 <span class="select is-small is-fullwidth">
                     <select @change="metricChanged" v-model="metric">
-                        <option v-for="(val, key) in metrics" :value="key" v-tooltip="tooltip('metric')">
-                            <span>{{ t('metrics.' + key) }}</span>
+                        <option v-for="(val, key) in metrics" :value="key" :key="key" v-tooltip="tooltip('metric')">
+                            {{ t('metrics.' + key) }}
                         </option>
                     </select>
                 </span>
@@ -17,7 +17,7 @@
             </p>
         </div>
 
-        <div class="field column">
+        <div class="field column" v-if="nointerval == undefined">
             <p v-lang.labels.interval />
             <p class="control has-icons-left" v-tooltip="tooltip('interval')">
                 <span class="is-fullwidth">
@@ -34,6 +34,7 @@
 <script>
 export default{
     name: 'in-filters',
+    props: ['nointerval'],
     data: () => ({
         metric: 'size',
         interval: 0,
@@ -42,10 +43,11 @@ export default{
             all:            25,
             size:           10,
             complexity:      5,
-            // encapsulation:  10,
             efferent:        2,
             afferent:        2,
-            cohesion:        1,
+            cohesion:        2,
+            instability:     100,
+            bug:             2,
         },
     }),
     computed: {
@@ -66,11 +68,12 @@ export default{
             this.interval = this.metrics[ this.metric ]
             this.intervalSave = this.interval
             this.$store.dispatch('setMetric', this.metric)
-            this.intervalChanged()
+            this.intervalChanged(false)
         },
-        intervalChanged() {
+        intervalChanged(emit = true) {
             this.$store.dispatch('setInterval', this.interval)
-            this.$bus.$emit('filterChanged')
+            if(emit)
+                this.$bus.$emit('filterChanged')
         }
     }
 }

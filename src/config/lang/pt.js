@@ -19,6 +19,9 @@ export default {
         current: 'Última geração',
         interval: 'Intervalo no gráfico',
         found: 'encontrados',
+        commits: 'Commits',
+        inserts: 'Inserções',
+        deletions: 'Remoções'
     },
 
     more: {
@@ -27,6 +30,7 @@ export default {
         project: 'Projeto',
         comparation: 'Comparação',
         history: 'História',
+        git: 'Equipe'
     },
 
     chart: {
@@ -39,9 +43,10 @@ export default {
         complexity: 'Complexidade Ciclomática',
         efferent: 'Acoplamento Eferente',
         afferent: 'Acoplamento Aferente',
-        encapsulation: 'Encapsulamento',
-        cohesion: 'Coesão',
+        cohesion: 'Falta de coesão',
         all: 'Todas métricas',
+        instability: 'Instabilidade',
+        bug: 'Bugs',
     },
 
     box: {
@@ -76,6 +81,10 @@ export default {
         star: {
             title: 'Como nós estamos?',
             body: 'Veja a quantidade de estrelas que seu código tem atualmente.'
+        },
+        select: {
+            title: 'Como anda sua equipe?',
+            body: 'Selecione a geração para ver o gráfico da sua equipe.'
         }
     },
 
@@ -84,8 +93,9 @@ export default {
         complexity: 'Quantidade de desvio de caminho',
         efferent: 'Número de dependências da classe',
         afferent: 'Números de dependentes da classe',
-        encapsulation: 'Relação entre tamanho de métodos públicos e privados',
         cohesion: 'Quantidade de partes em que o código pode se dividir',
         all: 'Somatória de todas as métricas',
+        instability: 'Quantidade de vezes que a classe se alterou',
+        bug: 'Quantidade de bugs na classe identificada pelo commit',
     },
 }

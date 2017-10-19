@@ -29,10 +29,6 @@
                         slot="histogram" id="h-before" name="h-before"
                         color="#35495E" :build="compare"
                     />
-                    <i-boxplot
-                        slot="boxplot" id="b-before" name="b-before"
-                        color="#35495E" :build="compare"
-                    />
                 </i-container>
 
                 <i-container title="labels.current" :build="lastBuild">
@@ -53,10 +49,6 @@
                         slot="histogram" id="h-after" name="h-after"
                         color="#41B883" :build="lastBuild"
                     />
-                    <i-boxplot
-                        slot="boxplot" id="b-after" name="b-after"
-                        color="#41B883" :build="lastBuild"
-                    />
                 </i-container>
             </section>
         </section>
@@ -70,12 +62,11 @@ import _ from 'lodash'
 import IFilters from '@/components/Filters.vue'
 import IContainer from '@/components/Container.vue'
 import IHistogram from '@/components/Histogram.vue'
-import IBoxplot from '@/components/Boxplot.vue'
 
 export default{
     name: 'in-timeline',
     props: ['name'],
-    components: { IFilters, IContainer, IHistogram, IBoxplot },
+    components: { IFilters, IContainer, IHistogram },
     data: () => ({
         compare : {date: '', classes: [], name: '', alias: null},
         term    : '',
