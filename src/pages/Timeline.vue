@@ -25,7 +25,7 @@
                     </section>
 
                     <i-histogram
-                        @getMax="getMax" :max="max"
+                        ref="hLeft"
                         slot="histogram" id="h-before" name="h-before"
                         color="#35495E" :build="compare"
                     />
@@ -50,7 +50,7 @@
                     </section>
 
                     <i-histogram
-                        @getMax="getMax" :max="max"
+                        ref="hRight"
                         slot="histogram" id="h-after" name="h-after"
                         color="#41B883" :build="compareRight"
                     />
@@ -76,8 +76,7 @@ export default{
         compare : {date: '', classes: [], name: '', alias: null},
         compareRight : {date: '', classes: [], name: '', alias: null},
         term    : '',
-        termRight    : '',
-        max: 0
+        termRight    : ''
     }),
     mounted() {
         setTimeout(() => {
@@ -115,7 +114,10 @@ export default{
         },
     }),
     watch: {
-        metric() { this.max = 0 },
+        metric() {
+            this.maxX = 0
+            this.maxY = 0
+        },
         $language() {this.$forceUpdate()}
     },
     methods: {
@@ -127,11 +129,6 @@ export default{
         comparationTarget() {
             if(this.termRight != undefined){
                 this.compareRight =  _.filter(this.builds, {date: this.termRight})[0]
-            }
-        },
-        getMax(newMax) {
-            if(newMax > this.max && newMax != undefined) {
-                this.max = newMax
             }
         },
         normalizeBuildName(build) {

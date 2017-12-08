@@ -1,4 +1,4 @@
-]<template>
+<template>
     <div></div>
 </template>
 
@@ -10,7 +10,7 @@ import { mapState } from 'vuex'
 
 export default{
     name: 'i-histogram',
-    props: [ 'build', 'name', 'color', 'max' ],
+    props: [ 'build', 'name', 'color' ],
     computed: mapState({
         metric: state => state.metric,
         interval: state => state.interval,
@@ -31,14 +31,16 @@ export default{
             }
         }
     }),
+    data: () => ({
+        mx: 0, my: 0
+    }),
     mounted() {
         this.loadData()
         this.$bus.$on('filterChanged', this.filterChanged)
-        // this.$bus.$on('maxChanged', this.maxChanged)
+        this.$bus.$on('maxChanged', this.maxChanged)
     },
     watch: {
         build()     { this.loadData() },
-        max()     { this.loadData() },
         $language() { this.loadData() },
     },
     methods: {
@@ -62,15 +64,15 @@ export default{
                         text: this.t(`metrics.${this.metric}`)
                     },
                     min: 0,
-                    max: this.max
+                    max: this.mx
                 },
                 yAxis: {
                     title: {
                         text: this.t('chart.incident')
                     },
-                    tickInterval: parseInt(this.max / 8),
+                    // tickInterval: parseInt(this.maxY / 8),
                     min: 0,
-                    max: this.max
+                    max: this.my
                 },
                 plotOptions: {
                     column: {
@@ -106,13 +108,40 @@ export default{
                     }
                 ]
             })
-            this.getMax(histogram)
+            this.$bus.$emit('maxChanged', this.getMx(histogram), this.getMy(histogram))
         },
-        getMax(histogram) {
+        maxChanged(mx, my) {
+
+            let changed = false
+            if(mx > this.mx) {
+                changed = true
+                this.mx = mx
+            }
+
+            if(my > this.my) {
+                changed = true
+                this.my = my
+            }
+
+            console.log(this.name + ' com ' + this.mx + ', ' + this.my)
+
+            if(changed)
+                this.loadData()
+            
+            if(mx != this.mx || my != this.my)
+                this.$bus.$emit('maxChanged', this.mx, this.my)
+        },
+        getMy(histogram) {
             const values = _.map(histogram, i => i[1])
 
             const max =  _.max(values)
-            this.$emit('getMax', (max % 2 == 0) ? max + 2 : max + 1)
+            return (max % 2 == 0) ? max + 2 : max + 1
+        },
+        getMx(histogram) {
+            const values = _.map(histogram, i => i[0])
+
+            const max =  _.max(values)
+            return (max % 2 == 0) ? max + 2 : max + 1
         },
         histogram(data, step) {
             let histo = {}, arr = [], x
@@ -134,7 +163,12 @@ export default{
             return arr
         },
         filterChanged() {
-            this.loadData()
+            this.mx = 0
+            this.my = 0
+            
+            setTimeout(() => {
+                this.loadData()
+            }, 200);
         },
     }
 }

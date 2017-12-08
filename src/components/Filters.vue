@@ -47,7 +47,7 @@ export default{
             afferent:        3,
             cohesion:        5,
             instability:   100,
-            bug:             2,
+            bug:             1,
         },
     }),
     computed: {
@@ -72,8 +72,7 @@ export default{
         },
         intervalChanged(emit = true) {
             this.$store.dispatch('setInterval', this.interval)
-            if(emit)
-                this.$bus.$emit('filterChanged')
+            this.$bus.$emit('filterChanged')
         }
     }
 }
