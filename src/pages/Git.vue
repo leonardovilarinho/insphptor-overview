@@ -6,6 +6,7 @@
                 <select v-model="date">
                     <option
                         v-for="build in builds"
+                        :key="build.date"
                         v-if="build.git"
                         :value="build.date"
                     >
@@ -63,6 +64,14 @@ export default{
             .value()
         },
     }),
+    mounted() {
+        setTimeout(() => {
+            const last = _(this.builds).last()
+
+            if(last.date != undefined)
+                this.date = last.date
+        }, 200);
+    },
     watch: {
         date(newVal) {
             this.current = _.filter(this.builds, {date: newVal})[0]
@@ -74,7 +83,7 @@ export default{
             if(build.alias != null)
                 name = build.alias
             return `${name} (${build.date})`
-        },
+        }
     }
 }
 </script>

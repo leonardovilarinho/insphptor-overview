@@ -36,6 +36,7 @@
                         <select v-model="termRight" @change="comparationTarget">
                             <option
                                 v-for="(build, key) in builds"
+                                :key="build.date"
                                 :value="build.date"
                             >
                                 {{ normalizeBuildName(build) }}
@@ -78,6 +79,21 @@ export default{
         termRight    : '',
         max: 0
     }),
+    mounted() {
+        setTimeout(() => {
+
+            const first = _(this.builds).first()
+            
+            this.compare = first
+            this.term = first.date
+            
+            const last = _(this.builds).last()
+            
+            this.compareRight = last
+            this.termRight = last.date
+
+        }, 200);
+    },
     computed: mapState({
         builds: function(state) {
             return _(state.jsons)
