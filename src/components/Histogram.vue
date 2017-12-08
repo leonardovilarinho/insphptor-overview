@@ -135,13 +135,17 @@ export default{
             const values = _.map(histogram, i => i[1])
 
             const max =  _.max(values)
-            return (max % 2 == 0) ? max + 2 : max + 1
+            const result = (max % 2 == 0) ? max + 2 : max + 1
+
+            return parseInt(result)
         },
         getMx(histogram) {
             const values = _.map(histogram, i => i[0])
 
             const max =  _.max(values)
-            return (max % 2 == 0) ? max + 2 : max + 1
+            const result = (max % 2 == 0) ? max + 2 : max + 1
+
+            return parseInt(result)
         },
         histogram(data, step) {
             let histo = {}, arr = [], x
