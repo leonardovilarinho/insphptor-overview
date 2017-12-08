@@ -60,7 +60,9 @@ export default{
                 xAxis: {
                     title: {
                         text: this.t(`metrics.${this.metric}`)
-                    }
+                    },
+                    min: 0,
+                    max: this.max
                 },
                 yAxis: {
                     title: {

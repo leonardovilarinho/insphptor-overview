@@ -10,7 +10,6 @@ import Bus from '@/Bus'
 Vue.use(Bus)
 
 Vue.component('i-header', require('@/template/Header.vue') )
-Vue.component('i-rate', require('@/components/Rate.vue') )
 Vue.component('i-modal', require('@/components/Modal.vue') )
 
 require('@/config/lang/lang')

@@ -8,7 +8,8 @@
                     <span class="select is-small is-fullwidth" v-tooltip="tooltip('compare')">
                         <select v-model="term" @change="comparation">
                             <option
-                                v-for="build in builds"
+                                v-for="(build, key) in builds"
+                                :key="key"
                                 v-if="build != lastBuild"
                                 :value="build.date"
                             >
@@ -21,7 +22,6 @@
 
                     <section class="columns">
                         <span class="column">{{ normalizeBuildName(compare) }}</span>
-                        <i-rate class="column has-text-right" :value="compare.star" v-tooltip="tooltip('star')" />
                     </section>
 
                     <i-histogram
@@ -33,21 +33,25 @@
 
                 <i-container title="labels.current" :build="lastBuild">
                     <span class="select  is-small is-fullwidth" v-tooltip="tooltip('last')">
-                        <select disabled>
-                            <option selected>{{ normalizeBuildName(lastBuild) }}</option>
+                        <select v-model="termRight" @change="comparationTarget">
+                            <option
+                                v-for="(build, key) in builds"
+                                :value="build.date"
+                            >
+                                {{ normalizeBuildName(build) }}
+                            </option>
                         </select>
                     </span>
 
-                    <p>{{ lastBuild.classes.length }} <span v-lang.labels.found /></p>
+                    <p>{{ compareRight.classes.length }} <span v-lang.labels.found /></p>
                     <section class="columns">
-                        <span class="column">{{ normalizeBuildName(lastBuild) }}</span>
-                        <i-rate class="column has-text-right" :value="lastBuild.star" v-tooltip="tooltip('star')"/>
+                        <span class="column">{{ normalizeBuildName(compareRight) }}</span>
                     </section>
 
                     <i-histogram
                         @getMax="getMax" :max="max"
                         slot="histogram" id="h-after" name="h-after"
-                        color="#41B883" :build="lastBuild"
+                        color="#41B883" :build="compareRight"
                     />
                 </i-container>
             </section>
@@ -69,7 +73,9 @@ export default{
     components: { IFilters, IContainer, IHistogram },
     data: () => ({
         compare : {date: '', classes: [], name: '', alias: null},
+        compareRight : {date: '', classes: [], name: '', alias: null},
         term    : '',
+        termRight    : '',
         max: 0
     }),
     computed: mapState({
@@ -80,7 +86,6 @@ export default{
                     date: i.date,
                     classes: i.classes,
                     key: k,
-                    star: i.star,
                     alias: i.alias,
                 }))
                 .filter({name: this.name})
@@ -101,6 +106,11 @@ export default{
         comparation() {
             if(this.term != undefined){
                 this.compare =  _.filter(this.builds, {date: this.term})[0]
+            }
+        },
+        comparationTarget() {
+            if(this.termRight != undefined){
+                this.compareRight =  _.filter(this.builds, {date: this.termRight})[0]
             }
         },
         getMax(newMax) {

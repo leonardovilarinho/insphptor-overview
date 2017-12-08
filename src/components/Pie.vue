@@ -61,9 +61,10 @@ export default{
                         allowPointSelect: true,
                         cursor: 'pointer',
                         dataLabels: {
-                            enabled: false
+                            enabled: true
                         },
-                        colors: ['#35495E', '#41B883']
+                        // showInLegend: true,
+                        colors: ['#41B883', '#35495E', '#F69BC1', '#F15E5E', '#FFCC33']
                     },
                 },
                 series: [{

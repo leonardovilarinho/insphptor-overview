@@ -2,7 +2,7 @@
     <header class='navbar is-transparent has-shadow navbar-fixed' id="navbar">
         <div class='navbar-brand'>
             <router-link class='navbar-item' to="/">
-                <img src='../assets/logo.png' alt='Vue'  height='28' /> Insphptor
+                <img src='../assets/logo.png' alt='Vue'  height='28' /> Insphptor Overview
             </router-link>
 
             <a class='navbar-item is-hidden-desktop-only' href='https://github.com/leonardovilarinho' target='_blank'>

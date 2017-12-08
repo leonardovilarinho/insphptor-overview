@@ -78,9 +78,9 @@ export default {
             title: 'Class summary',
             body: 'See the summary of this class below, click on the item to see more details.'
         },
-        star: {
+        weight: {
             title: 'How are we?',
-            body: 'See how many stars your code currently has.'
+            body: 'See how many weight your code currently has.'
         },
         select: {
             title: 'How\'s your team?',

@@ -12,7 +12,7 @@
                 v-tooltip="tooltip('_class', item.metrics, false)"
                 @click="open(item)"
             >
-                <i-rate :value="item.star" style="margin-right: 25px"/>
+                <span style="margin-right: 25px">{{ item.weight }}w</span>
                 <span v-text='item.namespace + "\\" + item.name' />
             </a>
         </nav>

@@ -31,7 +31,7 @@
                                 <icon name="history" style="margin-right: 5px"/>
                                 <span v-lang.more.history />
                             </a>
-                            <a  @click='toGit(project.name)'
+                            <a @click='toGit(project.name)'
                                 class="button is-primary is-small is-outlined"
                             >
                                 <icon name="code-fork" style="margin-right: 5px"/>

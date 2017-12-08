@@ -8,7 +8,7 @@
                         <p class="column is-9" style="font-weight: bold">
                             {{ current.namespace }}\{{ current.name }}
                         </p>
-                        <i-rate :value="current.star" class="column is-3 has-text-right" />
+                        <span class="column is-3 has-text-right">{{ current.weight }}w</span>
                     </div>
                     <div class="details" style="max-height: 55vh; overflow-y: auto">
                         <p><strong v-lang.title.type /> {{current.type}}</p>
